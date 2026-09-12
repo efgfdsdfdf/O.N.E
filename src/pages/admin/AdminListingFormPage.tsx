@@ -155,19 +155,19 @@ export default function AdminListingFormPage() {
   const specs = form.specifications as Record<string, any>;
 
   return (
-    <div className="space-y-6 max-w-5xl">
+    <div className="min-w-0 max-w-5xl overflow-x-hidden space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div className="flex min-w-0 items-center gap-3 sm:gap-4">
           <Button variant="ghost" size="icon" onClick={() => navigate('/admin/listings')} className="text-gray-400">
             <ArrowLeft className="h-5 w-5" />
           </Button>
-          <div>
+          <div className="min-w-0">
             <h1 className="text-2xl font-bold text-white">{isEdit ? 'Edit Listing' : 'New Listing'}</h1>
             <p className="text-gray-400 text-sm">{isEdit ? 'Update listing details' : 'Add a new product to your inventory'}</p>
           </div>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <Button variant="outline" className="border-white/20 text-white" onClick={() => handleSave('draft')} disabled={saving}>
             Save as Draft
           </Button>
@@ -178,7 +178,7 @@ export default function AdminListingFormPage() {
       </div>
 
       {/* Basic Info */}
-      <section className="bg-one-charcoal border border-white/10 rounded-xl p-6 space-y-5">
+      <section className="min-w-0 bg-one-charcoal border border-white/10 rounded-xl p-4 sm:p-6 space-y-5">
         <h2 className="text-lg font-semibold text-white">Basic Information</h2>
         <div className="grid md:grid-cols-2 gap-4">
           <div className="md:col-span-2 space-y-2">
@@ -241,7 +241,7 @@ export default function AdminListingFormPage() {
               </SelectContent>
             </Select>
           </div>
-          <div className="flex items-center gap-6 md:col-span-2 pt-2">
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6 md:col-span-2 pt-2">
             <label className="flex items-center gap-2 cursor-pointer">
               <input type="checkbox" checked={form.negotiable} onChange={e => updateField('negotiable', e.target.checked)} className="rounded" />
               <span className="text-sm text-gray-300">Negotiable</span>
@@ -264,7 +264,7 @@ export default function AdminListingFormPage() {
       </section>
 
       {/* Specifications */}
-      <section className="bg-one-charcoal border border-white/10 rounded-xl p-6 space-y-5">
+      <section className="min-w-0 bg-one-charcoal border border-white/10 rounded-xl p-4 sm:p-6 space-y-5">
         <h2 className="text-lg font-semibold text-white">Specifications</h2>
         {(form.listing_type === 'vehicle' || form.listing_type === 'motorcycle') && (
           <div className="grid md:grid-cols-3 gap-4">
@@ -333,9 +333,9 @@ export default function AdminListingFormPage() {
 
       {/* Features */}
       {(form.listing_type === 'vehicle' || form.listing_type === 'motorcycle') && (
-        <section className="bg-one-charcoal border border-white/10 rounded-xl p-6 space-y-4">
+        <section className="min-w-0 bg-one-charcoal border border-white/10 rounded-xl p-4 sm:p-6 space-y-4">
           <h2 className="text-lg font-semibold text-white">Features</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
             {VEHICLE_FEATURES.map(f => (
               <label key={f} className="flex items-center gap-2 cursor-pointer p-2 rounded-lg hover:bg-one-black/50 transition-colors">
                 <input type="checkbox" checked={form.features?.includes(f) || false} onChange={() => toggleFeature(f)} className="rounded" />
@@ -347,7 +347,7 @@ export default function AdminListingFormPage() {
       )}
 
       {/* Images */}
-      <section className="bg-one-charcoal border border-white/10 rounded-xl p-6 space-y-4">
+      <section className="min-w-0 bg-one-charcoal border border-white/10 rounded-xl p-4 sm:p-6 space-y-4">
         <h2 className="text-lg font-semibold text-white">Photos & Videos</h2>
         {!isEdit && <p className="text-sm text-gray-500">Save the listing first, then you can upload photos and videos.</p>}
         {isEdit && (
@@ -362,7 +362,7 @@ export default function AdminListingFormPage() {
                   )}
                   {img.is_cover && <span className="absolute top-2 left-2 bg-one-red text-white text-[10px] px-2 py-0.5 rounded-full font-medium">Cover</span>}
                   {img.media_type === 'video' && <span className="absolute bottom-2 left-2 bg-black/70 text-white text-[10px] px-2 py-0.5 rounded-full font-medium">Video</span>}
-                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-wrap items-center justify-center gap-2 p-2">
                     <Button size="sm" variant="outline" className="h-8 text-xs border-white/40 text-white" onClick={() => handleSetCover(img)}>
                       <Star className="h-3 w-3 mr-1" /> Cover
                     </Button>
@@ -384,7 +384,7 @@ export default function AdminListingFormPage() {
       </section>
 
       {/* SEO */}
-      <section className="bg-one-charcoal border border-white/10 rounded-xl overflow-hidden">
+      <section className="min-w-0 bg-one-charcoal border border-white/10 rounded-xl overflow-hidden">
         <button onClick={() => setShowSeo(!showSeo)} className="w-full p-6 flex items-center justify-between text-left">
           <h2 className="text-lg font-semibold text-white">SEO Settings</h2>
           {showSeo ? <ChevronUp className="h-5 w-5 text-gray-400" /> : <ChevronDown className="h-5 w-5 text-gray-400" />}
@@ -404,7 +404,7 @@ export default function AdminListingFormPage() {
       </section>
 
       {/* Bottom Actions */}
-      <div className="flex justify-end gap-3 pb-8">
+      <div className="flex flex-wrap justify-end gap-3 pb-8">
         <Button variant="outline" className="border-white/20 text-white" onClick={() => navigate('/admin/listings')}>Cancel</Button>
         <Button variant="outline" className="border-white/20 text-white" onClick={() => handleSave('draft')} disabled={saving}>Save as Draft</Button>
         <Button onClick={() => handleSave('published')} disabled={saving}><Save className="h-4 w-4 mr-2" />{saving ? 'Saving...' : 'Publish'}</Button>

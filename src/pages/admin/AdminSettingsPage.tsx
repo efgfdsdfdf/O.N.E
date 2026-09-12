@@ -96,9 +96,9 @@ export default function AdminSettingsPage() {
   if (isLoading) return <div className="text-gray-500 text-center py-12">Loading settings...</div>;
 
   return (
-    <div className="space-y-6 max-w-4xl">
-      <div className="flex justify-between items-center">
-        <div>
+    <div className="min-w-0 max-w-4xl overflow-x-hidden space-y-6">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+        <div className="min-w-0">
           <h1 className="text-2xl font-bold text-white">Website Settings</h1>
           <p className="text-gray-400">Configure your business info, content, and templates.</p>
         </div>
@@ -108,17 +108,19 @@ export default function AdminSettingsPage() {
       </div>
 
       <Tabs defaultValue="business" className="space-y-6">
-        <TabsList className="bg-one-charcoal border border-white/10">
-          <TabsTrigger value="business">Business</TabsTrigger>
-          <TabsTrigger value="hours">Hours</TabsTrigger>
-          <TabsTrigger value="content">Content</TabsTrigger>
-          <TabsTrigger value="social">Social</TabsTrigger>
-          <TabsTrigger value="whatsapp">WhatsApp</TabsTrigger>
-        </TabsList>
+        <div className="max-w-full overflow-x-auto pb-1">
+          <TabsList className="bg-one-charcoal border border-white/10">
+            <TabsTrigger value="business">Business</TabsTrigger>
+            <TabsTrigger value="hours">Hours</TabsTrigger>
+            <TabsTrigger value="content">Content</TabsTrigger>
+            <TabsTrigger value="social">Social</TabsTrigger>
+            <TabsTrigger value="whatsapp">WhatsApp</TabsTrigger>
+          </TabsList>
+        </div>
 
         {/* Business Info */}
         <TabsContent value="business" className="space-y-6">
-          <section className="bg-one-charcoal border border-white/10 rounded-xl p-6 space-y-4">
+          <section className="min-w-0 bg-one-charcoal border border-white/10 rounded-xl p-4 sm:p-6 space-y-4">
             <h2 className="text-lg font-semibold text-white flex items-center gap-2"><MapPin className="h-5 w-5 text-one-red" /> Showroom Location</h2>
             <div className="flex flex-col sm:flex-row gap-3">
               <div className="flex-1">
@@ -131,7 +133,7 @@ export default function AdminSettingsPage() {
                 </Button>
               </div>
             </div>
-            <div className="h-[320px] rounded-xl overflow-hidden border border-white/10">
+            <div className="h-[320px] max-w-full rounded-xl overflow-hidden border border-white/10">
               <Map
                 lat={mapPreview.lat}
                 lng={mapPreview.lng}
@@ -150,7 +152,7 @@ export default function AdminSettingsPage() {
             </details>
           </section>
 
-          <section className="bg-one-charcoal border border-white/10 rounded-xl p-6 space-y-4">
+          <section className="min-w-0 bg-one-charcoal border border-white/10 rounded-xl p-4 sm:p-6 space-y-4">
             <h2 className="text-lg font-semibold text-white flex items-center gap-2"><Store className="h-5 w-5 text-one-red" /> Business Information</h2>
             <div className="grid md:grid-cols-2 gap-4">
               <Field label="Business Name" value={settings.business_name} onChange={v => update('business_name', v)} />
@@ -165,11 +167,11 @@ export default function AdminSettingsPage() {
 
         {/* Hours */}
         <TabsContent value="hours">
-          <section className="bg-one-charcoal border border-white/10 rounded-xl p-6 space-y-4">
+          <section className="min-w-0 bg-one-charcoal border border-white/10 rounded-xl p-4 sm:p-6 space-y-4">
             <h2 className="text-lg font-semibold text-white flex items-center gap-2"><Clock className="h-5 w-5 text-one-red" /> Working Hours</h2>
             <div className="space-y-3">
               {DAYS.map(day => (
-                <div key={day} className="flex items-center gap-4">
+                <div key={day} className="flex min-w-0 flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
                   <span className="text-gray-300 w-28 capitalize text-sm">{day}</span>
                   <Input
                     value={hours[day] || hours[day.charAt(0).toUpperCase() + day.slice(1)] || ''}
@@ -185,7 +187,7 @@ export default function AdminSettingsPage() {
 
         {/* Content */}
         <TabsContent value="content">
-          <section className="bg-one-charcoal border border-white/10 rounded-xl p-6 space-y-4">
+          <section className="min-w-0 bg-one-charcoal border border-white/10 rounded-xl p-4 sm:p-6 space-y-4">
             <h2 className="text-lg font-semibold text-white">Homepage Content</h2>
             <Field label="Hero Title" value={settings.hero_title} onChange={v => update('hero_title', v)} />
             <Field label="Hero Subtitle" value={settings.hero_subtitle} onChange={v => update('hero_subtitle', v)} />
@@ -200,7 +202,7 @@ export default function AdminSettingsPage() {
 
         {/* Social */}
         <TabsContent value="social">
-          <section className="bg-one-charcoal border border-white/10 rounded-xl p-6 space-y-4">
+          <section className="min-w-0 bg-one-charcoal border border-white/10 rounded-xl p-4 sm:p-6 space-y-4">
             <h2 className="text-lg font-semibold text-white flex items-center gap-2"><Globe className="h-5 w-5 text-one-red" /> Social Media Links</h2>
             <Field label="Instagram" value={settings.social_instagram} onChange={v => update('social_instagram', v)} placeholder="https://instagram.com/..." />
             <Field label="Facebook" value={settings.social_facebook} onChange={v => update('social_facebook', v)} placeholder="https://facebook.com/..." />
@@ -211,7 +213,7 @@ export default function AdminSettingsPage() {
 
         {/* WhatsApp Templates */}
         <TabsContent value="whatsapp">
-          <section className="bg-one-charcoal border border-white/10 rounded-xl p-6 space-y-5">
+          <section className="min-w-0 bg-one-charcoal border border-white/10 rounded-xl p-4 sm:p-6 space-y-5">
             <div>
               <h2 className="text-lg font-semibold text-white flex items-center gap-2"><MessageCircle className="h-5 w-5 text-green-500" /> WhatsApp Message Templates</h2>
               <p className="text-sm text-gray-500 mt-1">Available placeholders: <code className="text-one-red">{'{title}'}</code>, <code className="text-one-red">{'{price}'}</code>, <code className="text-one-red">{'{url}'}</code></p>
@@ -251,7 +253,7 @@ export default function AdminSettingsPage() {
 // Reusable field component
 function Field({ label, value, onChange, placeholder }: { label: string; value?: string; onChange: (v: string) => void; placeholder?: string }) {
   return (
-    <div className="space-y-2">
+    <div className="min-w-0 space-y-2">
       <Label className="text-gray-300">{label}</Label>
       <Input value={value || ''} onChange={e => onChange(e.target.value)} className="bg-one-black border-white/10 text-white" placeholder={placeholder} />
     </div>

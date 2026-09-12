@@ -1,5 +1,9 @@
 import { supabase } from '@/lib/supabase';
 import type { EventType } from '@/types';
+import { listingService } from '@/services/listingService';
+
+const VIEW_DEDUPE_KEY = 'one_mc_seen_listing_views';
+const VIEW_DEDUPE_MS = 24 * 60 * 60 * 1000;
 
 export const analyticsService = {
   async trackEvent(eventType: EventType, listingId?: string, metadata?: Record<string, unknown>): Promise<void> {
@@ -13,6 +17,16 @@ export const analyticsService = {
       // Silently fail analytics - never break user experience
       console.warn('Failed to track analytics event');
     }
+  },
+
+  async trackListingView(listingId: string): Promise<boolean> {
+    if (!shouldTrackListingView(listingId)) return false;
+
+    await Promise.all([
+      this.trackEvent('listing_view', listingId),
+      listingService.incrementViews(listingId),
+    ]);
+    return true;
   },
 
   async getTopListings(eventType: EventType, limit = 10): Promise<{ listing_id: string; count: number }[]> {
@@ -52,3 +66,30 @@ export const analyticsService = {
     return counts;
   },
 };
+
+function shouldTrackListingView(listingId: string): boolean {
+  if (typeof window === 'undefined') return true;
+
+  try {
+    const now = Date.now();
+    const raw = window.localStorage.getItem(VIEW_DEDUPE_KEY);
+    const seen = raw ? JSON.parse(raw) as Record<string, number> : {};
+
+    for (const [id, timestamp] of Object.entries(seen)) {
+      if (now - timestamp > VIEW_DEDUPE_MS) {
+        delete seen[id];
+      }
+    }
+
+    if (seen[listingId] && now - seen[listingId] < VIEW_DEDUPE_MS) {
+      window.localStorage.setItem(VIEW_DEDUPE_KEY, JSON.stringify(seen));
+      return false;
+    }
+
+    seen[listingId] = now;
+    window.localStorage.setItem(VIEW_DEDUPE_KEY, JSON.stringify(seen));
+    return true;
+  } catch {
+    return true;
+  }
+}

@@ -87,7 +87,7 @@ export default function AdminListingsPage() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="min-w-0 max-w-full overflow-x-hidden space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h1 className="text-2xl font-bold text-white">Manage Listings</h1>
@@ -102,8 +102,8 @@ export default function AdminListingsPage() {
       </div>
 
       {/* Filters */}
-      <div className="bg-one-charcoal border border-white/10 rounded-xl p-4 flex flex-wrap gap-4">
-        <div className="flex-1 min-w-[200px] relative">
+      <div className="min-w-0 bg-one-charcoal border border-white/10 rounded-xl p-4 flex flex-col sm:flex-row sm:flex-wrap gap-4">
+        <div className="w-full sm:flex-1 sm:min-w-[200px] relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
           <Input 
             placeholder="Search listings..." 
@@ -112,7 +112,7 @@ export default function AdminListingsPage() {
             className="pl-9 bg-one-black border-white/10 text-white h-10"
           />
         </div>
-        <div className="w-[180px]">
+        <div className="w-full sm:w-[180px]">
           <Select value={filters.listing_type || 'all'} onValueChange={handleTypeChange}>
             <SelectTrigger className="bg-one-black border-white/10 text-white h-10">
               <SelectValue placeholder="All Types" />
@@ -125,7 +125,7 @@ export default function AdminListingsPage() {
             </SelectContent>
           </Select>
         </div>
-        <div className="w-[180px]">
+        <div className="w-full sm:w-[180px]">
           <Select value={filters.status || 'all'} onValueChange={handleStatusChange}>
             <SelectTrigger className="bg-one-black border-white/10 text-white h-10">
               <SelectValue placeholder="All Statuses" />
@@ -143,9 +143,9 @@ export default function AdminListingsPage() {
       </div>
 
       {/* Table */}
-      <div className="bg-one-charcoal border border-white/10 rounded-xl overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm">
+      <div className="max-w-full bg-one-charcoal border border-white/10 rounded-xl overflow-hidden">
+        <div className="max-w-full overflow-x-auto">
+          <table className="min-w-[760px] w-full text-left text-sm">
             <thead className="bg-one-black/50 text-gray-400 border-b border-white/10">
               <tr>
                 <th className="p-4 font-medium">Listing</th>
@@ -183,7 +183,7 @@ export default function AdminListingsPage() {
                             </div>
                           )}
                         </div>
-                        <div className="max-w-[200px]">
+                        <div className="max-w-[200px] min-w-0">
                           <p className="font-medium text-white truncate">{listing.title}</p>
                           <p className="text-xs text-gray-500 truncate">{listing.slug}</p>
                         </div>
@@ -254,8 +254,8 @@ export default function AdminListingsPage() {
         
         {/* Pagination Placeholder */}
         {data && data.total_pages > 1 && (
-          <div className="p-4 border-t border-white/10 flex justify-between items-center text-sm text-gray-400">
-            <span>Showing {((filters.page || 1) - 1) * (filters.per_page || 12) + 1} to Math.min((filters.page || 1) * (filters.per_page || 12), data.count) of {data.count}</span>
+          <div className="p-4 border-t border-white/10 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 text-sm text-gray-400">
+            <span>Showing {((filters.page || 1) - 1) * (filters.per_page || 12) + 1} to {Math.min((filters.page || 1) * (filters.per_page || 12), data.count)} of {data.count}</span>
             <div className="flex gap-2">
               <Button 
                 variant="outline" 

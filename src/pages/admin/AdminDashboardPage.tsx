@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { 
-  Car, Eye, MousePointerClick, MessageSquare, 
-  TrendingUp, Clock, AlertCircle 
+  Car, Eye, MousePointerClick, TrendingUp,
 } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -11,6 +10,7 @@ import { formatRelativeDate } from '@/utils/helpers';
 import { useQuery } from '@tanstack/react-query';
 import { enquiryService } from '@/services/enquiryService';
 import { analyticsService } from '@/services/analyticsService';
+import { listingService } from '@/services/listingService';
 
 export default function AdminDashboardPage() {
   const { data: stats } = useListingStats();
@@ -59,7 +59,7 @@ export default function AdminDashboardPage() {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="min-w-0 max-w-full overflow-x-hidden space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h1 className="text-2xl font-bold text-white">Dashboard Overview</h1>
@@ -76,10 +76,10 @@ export default function AdminDashboardPage() {
       {/* Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {statCards.map((stat, i) => (
-          <Card key={i} className="bg-one-charcoal border-white/10 p-6 flex flex-col justify-between">
-            <div className="flex justify-between items-start mb-4">
+          <Card key={i} className="min-w-0 bg-one-charcoal border-white/10 p-5 sm:p-6 flex flex-col justify-between">
+            <div className="flex min-w-0 justify-between items-start gap-3 mb-4">
               <div className="p-2 bg-one-black rounded-lg">{stat.icon}</div>
-              <span className="text-sm font-medium text-gray-400">{stat.title}</span>
+              <span className="min-w-0 text-right text-sm font-medium text-gray-400">{stat.title}</span>
             </div>
             <div>
               <h3 className="text-3xl font-bold text-white">{stat.value}</h3>
@@ -89,9 +89,9 @@ export default function AdminDashboardPage() {
         ))}
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-6">
+      <div className="grid min-w-0 lg:grid-cols-2 gap-6">
         {/* Recent Listings */}
-        <Card className="bg-one-charcoal border-white/10 p-6">
+        <Card className="min-w-0 bg-one-charcoal border-white/10 p-4 sm:p-6">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-lg font-bold text-white">Recently Added</h2>
             <Link to="/admin/listings" className="text-sm text-one-red hover:underline">View All</Link>
@@ -101,10 +101,10 @@ export default function AdminDashboardPage() {
               <p className="text-gray-500 text-sm">No listings found.</p>
             ) : (
               recentListings?.map(listing => (
-                <div key={listing.id} className="flex items-center gap-4 p-3 rounded-lg bg-one-black/50 border border-white/5">
+                <div key={listing.id} className="flex min-w-0 items-center gap-3 sm:gap-4 p-3 rounded-lg bg-one-black/50 border border-white/5">
                   <div className="w-12 h-12 rounded bg-one-charcoal shrink-0 overflow-hidden">
                     {listing.images?.[0] ? (
-                      <img src={`https://your-project.supabase.co/storage/v1/object/public/listings/${listing.images[0].storage_path}`} alt="" className="w-full h-full object-cover" />
+                      <img src={listingService.getImageUrl(listing.images[0].storage_path)} alt="" className="w-full h-full object-cover" />
                     ) : (
                       <Car className="w-6 h-6 m-3 text-gray-600" />
                     )}
@@ -130,7 +130,7 @@ export default function AdminDashboardPage() {
         </Card>
 
         {/* Recent Enquiries */}
-        <Card className="bg-one-charcoal border-white/10 p-6">
+        <Card className="min-w-0 bg-one-charcoal border-white/10 p-4 sm:p-6">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-lg font-bold text-white">Recent Enquiries</h2>
             <Link to="/admin/enquiries" className="text-sm text-one-red hover:underline">View All</Link>
@@ -141,10 +141,10 @@ export default function AdminDashboardPage() {
             ) : (
               recentEnquiries?.map(enq => (
                 <div key={enq.id} className="p-3 rounded-lg bg-one-black/50 border border-white/5 space-y-2">
-                  <div className="flex justify-between items-start gap-2">
-                    <div className="flex items-center gap-2 text-sm font-medium text-white">
+                  <div className="flex min-w-0 justify-between items-start gap-2">
+                    <div className="flex min-w-0 items-center gap-2 text-sm font-medium text-white">
                       {enq.status === 'new' && <span className="w-2 h-2 rounded-full bg-one-red" />}
-                      {enq.name}
+                      <span className="min-w-0 truncate">{enq.name}</span>
                     </div>
                     <span className="text-[10px] text-gray-500 whitespace-nowrap">
                       {formatRelativeDate(enq.created_at || '')}

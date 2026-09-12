@@ -50,14 +50,14 @@ export default function AdminEnquiriesPage() {
   };
 
   return (
-    <div className="space-y-6">
-      <div>
+    <div className="min-w-0 max-w-full overflow-x-hidden space-y-6">
+      <div className="min-w-0">
         <h1 className="text-2xl font-bold text-white">Enquiries</h1>
         <p className="text-gray-400">Messages and enquiries from potential customers.</p>
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex gap-2">
+      <div className="flex max-w-full gap-2 overflow-x-auto pb-1">
         {TABS.map(tab => (
           <Button
             key={tab.value}
@@ -88,16 +88,16 @@ export default function AdminEnquiriesPage() {
           </div>
         ) : (
           enquiries?.map(enq => (
-            <div key={enq.id} className="bg-one-charcoal border border-white/10 rounded-xl overflow-hidden">
+            <div key={enq.id} className="min-w-0 bg-one-charcoal border border-white/10 rounded-xl overflow-hidden">
               <div
                 className="p-4 cursor-pointer hover:bg-one-black/30 transition-colors"
                 onClick={() => setExpanded(expanded === enq.id ? null : enq.id)}
               >
-                <div className="flex items-start justify-between gap-4">
+                <div className="flex min-w-0 items-start justify-between gap-3 sm:gap-4">
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-3 mb-1">
+                    <div className="flex min-w-0 flex-wrap items-center gap-2 sm:gap-3 mb-1">
                       {enq.status === 'new' && <span className="w-2.5 h-2.5 rounded-full bg-one-red animate-pulse shrink-0" />}
-                      <span className="font-semibold text-white">{enq.name}</span>
+                      <span className="min-w-0 truncate font-semibold text-white">{enq.name}</span>
                       <Badge className={`text-[10px] uppercase ${STATUS_STYLES[enq.status]}`}>{enq.status}</Badge>
                     </div>
                     <p className="text-sm text-gray-400 line-clamp-1">{enq.message}</p>
@@ -114,14 +114,14 @@ export default function AdminEnquiriesPage() {
                 <div className="border-t border-white/10 p-4 bg-one-black/30 space-y-4">
                   <p className="text-gray-300 whitespace-pre-wrap">{enq.message}</p>
                   
-                  <div className="flex flex-wrap gap-3 text-sm">
+                  <div className="flex min-w-0 flex-wrap gap-3 text-sm">
                     {enq.phone && (
-                      <a href={`tel:${enq.phone}`} className="flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors">
+                      <a href={`tel:${enq.phone}`} className="flex min-w-0 items-center gap-1.5 break-words text-gray-400 hover:text-white transition-colors">
                         <Phone className="h-4 w-4" /> {enq.phone}
                       </a>
                     )}
                     {enq.email && (
-                      <a href={`mailto:${enq.email}`} className="flex items-center gap-1.5 text-gray-400 hover:text-white transition-colors">
+                      <a href={`mailto:${enq.email}`} className="flex min-w-0 items-center gap-1.5 break-all text-gray-400 hover:text-white transition-colors">
                         <Mail className="h-4 w-4" /> {enq.email}
                       </a>
                     )}
@@ -137,7 +137,7 @@ export default function AdminEnquiriesPage() {
                     )}
                   </div>
 
-                  <div className="flex gap-2 pt-2">
+                  <div className="flex flex-wrap gap-2 pt-2">
                     {enq.status !== 'contacted' && (
                       <Button size="sm" variant="outline" className="border-yellow-500/30 text-yellow-400 hover:bg-yellow-500/10" onClick={() => handleStatusUpdate(enq.id, 'contacted')}>
                         <Clock className="h-3.5 w-3.5 mr-1.5" /> Mark Contacted
@@ -148,7 +148,7 @@ export default function AdminEnquiriesPage() {
                         <CheckCircle className="h-3.5 w-3.5 mr-1.5" /> Mark Closed
                       </Button>
                     )}
-                    <Button size="sm" variant="ghost" className="text-gray-500 hover:text-one-red ml-auto" onClick={() => handleDelete(enq.id)}>
+                    <Button size="sm" variant="ghost" className="text-gray-500 hover:text-one-red sm:ml-auto" onClick={() => handleDelete(enq.id)}>
                       <Trash2 className="h-3.5 w-3.5 mr-1.5" /> Delete
                     </Button>
                   </div>

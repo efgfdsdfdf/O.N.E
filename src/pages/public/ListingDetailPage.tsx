@@ -34,7 +34,7 @@ export default function ListingDetailPage() {
 
   useEffect(() => {
     if (listing) {
-      analyticsService.trackEvent('listing_view', listing.id);
+      analyticsService.trackListingView(listing.id);
     }
   }, [listing?.id]);
 

@@ -50,17 +50,18 @@ export default function AdminBrandsPage() {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <div>
+    <div className="min-w-0 max-w-full overflow-x-hidden space-y-6">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+        <div className="min-w-0">
           <h1 className="text-2xl font-bold text-white">Brands</h1>
           <p className="text-gray-400">Manage vehicle and product brands.</p>
         </div>
         <Button onClick={openNew} className="gap-2"><Plus className="h-4 w-4" /> Add Brand</Button>
       </div>
 
-      <div className="bg-one-charcoal border border-white/10 rounded-xl overflow-hidden">
-        <table className="w-full text-left text-sm">
+      <div className="max-w-full bg-one-charcoal border border-white/10 rounded-xl overflow-hidden">
+        <div className="max-w-full overflow-x-auto">
+        <table className="min-w-[460px] w-full text-left text-sm">
           <thead className="bg-one-black/50 text-gray-400 border-b border-white/10">
             <tr>
               <th className="p-4 font-medium">Name</th>
@@ -89,6 +90,7 @@ export default function AdminBrandsPage() {
             )}
           </tbody>
         </table>
+        </div>
       </div>
 
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>

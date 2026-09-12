@@ -47,7 +47,7 @@ export function AdminLayout() {
   };
 
   return (
-    <div className="dark bg-one-black min-h-screen flex overflow-hidden">
+    <div className="dark bg-one-black min-h-screen w-full max-w-full flex overflow-hidden">
       {/* Mobile Sidebar Overlay */}
       {sidebarOpen && (
         <div 
@@ -110,7 +110,7 @@ export function AdminLayout() {
       </aside>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
+      <div className="flex-1 flex flex-col min-w-0 max-w-full h-screen overflow-hidden">
         {/* Mobile Header */}
         <header className="lg:hidden h-16 bg-one-charcoal border-b border-white/10 flex items-center justify-between px-4 shrink-0">
           <Logo size="sm" variant="light" />
@@ -120,7 +120,7 @@ export function AdminLayout() {
         </header>
 
         {/* Page Content */}
-        <main className="flex-1 overflow-y-auto bg-one-black p-4 lg:p-8">
+        <main className="flex-1 min-w-0 max-w-full overflow-x-hidden overflow-y-auto bg-one-black p-3 sm:p-4 lg:p-8">
           <Outlet />
         </main>
       </div>

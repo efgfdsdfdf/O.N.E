@@ -50,17 +50,18 @@ export default function AdminCategoriesPage() {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <div>
+    <div className="min-w-0 max-w-full overflow-x-hidden space-y-6">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+        <div className="min-w-0">
           <h1 className="text-2xl font-bold text-white">Categories</h1>
           <p className="text-gray-400">Manage product categories for your inventory.</p>
         </div>
         <Button onClick={openNew} className="gap-2"><Plus className="h-4 w-4" /> Add Category</Button>
       </div>
 
-      <div className="bg-one-charcoal border border-white/10 rounded-xl overflow-hidden">
-        <table className="w-full text-left text-sm">
+      <div className="max-w-full bg-one-charcoal border border-white/10 rounded-xl overflow-hidden">
+        <div className="max-w-full overflow-x-auto">
+        <table className="min-w-[560px] w-full text-left text-sm">
           <thead className="bg-one-black/50 text-gray-400 border-b border-white/10">
             <tr>
               <th className="p-4 font-medium">Name</th>
@@ -97,6 +98,7 @@ export default function AdminCategoriesPage() {
             )}
           </tbody>
         </table>
+        </div>
       </div>
 
       {/* Dialog */}
@@ -106,7 +108,7 @@ export default function AdminCategoriesPage() {
           <div className="space-y-4 mt-4">
             <div className="space-y-2"><Label className="text-gray-300">Name *</Label><Input value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} className="bg-one-black border-white/10 text-white" /></div>
             <div className="space-y-2"><Label className="text-gray-300">Description</Label><Input value={form.description || ''} onChange={e => setForm({ ...form, description: e.target.value })} className="bg-one-black border-white/10 text-white" /></div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid sm:grid-cols-2 gap-4">
               <div className="space-y-2"><Label className="text-gray-300">Icon (Lucide name)</Label><Input value={form.icon || ''} onChange={e => setForm({ ...form, icon: e.target.value })} className="bg-one-black border-white/10 text-white" placeholder="e.g. car" /></div>
               <div className="space-y-2"><Label className="text-gray-300">Sort Order</Label><Input type="number" value={form.sort_order || 0} onChange={e => setForm({ ...form, sort_order: Number(e.target.value) })} className="bg-one-black border-white/10 text-white" /></div>
             </div>
