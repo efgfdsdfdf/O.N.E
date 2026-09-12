@@ -141,7 +141,7 @@ export function Footer() {
           </p>
           <span className="hidden sm:inline text-gray-700">•</span>
           <a
-            href="https://wa.me/2349040303390?text=Hi%20David%2C%20I%20saw%20your%20work%20on%20O.N.E%20Multi-Concepts%20and%20I%27d%20like%20to%20discuss%20a%20project."
+            href="https://wa.me/2349015206791?text=Hi%20David%2C%20I%20saw%20your%20work%20on%20O.N.E%20Multi-Concepts%20and%20I%27d%20like%20to%20discuss%20a%20project."
             target="_blank"
             rel="noopener noreferrer"
             className="text-[11px] text-gray-600 hover:text-green-400 transition-colors flex items-center gap-1"
