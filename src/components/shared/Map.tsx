@@ -100,7 +100,7 @@ export function Map({ lat, lng, title, address, className, showDirections = true
   };
 
   return (
-    <div className={`relative rounded-xl overflow-hidden z-10 ${className}`}>
+    <div className={`relative z-10 w-full max-w-full overflow-hidden rounded-xl ${className}`}>
       <MapContainer center={[lat, lng]} zoom={15} className="w-full h-full min-h-[300px]">
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -136,7 +136,7 @@ export function Map({ lat, lng, title, address, className, showDirections = true
         </Marker>
       </MapContainer>
       {showDirections && (
-        <div className="absolute left-3 right-3 bottom-3 z-[500] max-h-[55%] overflow-y-auto rounded-lg border border-white/10 bg-one-black/90 p-3 text-white shadow-xl backdrop-blur sm:left-auto sm:w-80">
+        <div className="absolute bottom-3 left-3 right-3 z-[500] max-h-[55%] max-w-[calc(100%-1.5rem)] overflow-y-auto rounded-lg border border-white/10 bg-one-black/90 p-3 text-white shadow-xl backdrop-blur sm:left-auto sm:w-80">
           <Button size="sm" className="w-full gap-2" onClick={handleDirections} disabled={routeLoading}>
             <LocateFixed className="h-4 w-4" />
             {routeLoading ? 'Getting your route...' : 'Use My Location for Directions'}
