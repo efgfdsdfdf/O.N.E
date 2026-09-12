@@ -237,10 +237,10 @@ export default function HomePage() {
       </section>
 
       {/* Bottom CTA */}
-      <section className="bg-one-red py-12">
+      <section className="bg-one-charcoal py-12 border-y border-white/10">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-2xl lg:text-3xl font-bold text-white mb-4">Drive Your Dreams</h2>
-          <p className="text-white/80 mb-6 max-w-xl mx-auto">
+          <p className="text-gray-400 mb-6 max-w-xl mx-auto">
             Find your perfect vehicle, part, or accessory today. We're here to help.
           </p>
           <div className="flex justify-center gap-3">

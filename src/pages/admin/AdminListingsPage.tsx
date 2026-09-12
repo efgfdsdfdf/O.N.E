@@ -178,7 +178,7 @@ export default function AdminListingsPage() {
                             <Car className="w-6 h-6 m-3 text-gray-600" />
                           )}
                           {listing.featured && (
-                            <div className="absolute top-0 right-0 bg-one-red text-white p-0.5 rounded-bl">
+                            <div className="absolute top-0 right-0 bg-one-red text-one-black p-0.5 rounded-bl">
                               <Star className="h-3 w-3 fill-current" />
                             </div>
                           )}

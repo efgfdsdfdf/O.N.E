@@ -61,7 +61,7 @@ Listing: {url}'),
 
 Price: {price}
 Listing: {url}'),
-('primary_color', '#DC2626'),
+('primary_color', '#D6A84F'),
 ('currency', 'NGN'),
 ('currency_symbol', '₦'),
 ('listings_per_page', '12');

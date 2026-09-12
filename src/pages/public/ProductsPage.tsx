@@ -146,7 +146,7 @@ export default function ProductsPage() {
                 <button
                   onClick={() => updateFilter('category', '')}
                   className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors ${
-                    !selectedCategory ? 'bg-one-red text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'
+                    !selectedCategory ? 'bg-one-red text-one-black' : 'text-gray-400 hover:text-white hover:bg-white/5'
                   }`}
                 >
                   All Categories
@@ -156,7 +156,7 @@ export default function ProductsPage() {
                     key={cat.id}
                     onClick={() => updateFilter('category', cat.id)}
                     className={`w-full text-left px-3 py-2 rounded-md text-sm transition-colors ${
-                      selectedCategory === cat.id ? 'bg-one-red text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'
+                      selectedCategory === cat.id ? 'bg-one-red text-one-black' : 'text-gray-400 hover:text-white hover:bg-white/5'
                     }`}
                   >
                     {cat.name}

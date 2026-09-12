@@ -29,7 +29,7 @@ export function Logo({ className, size = 'md', variant = 'light' }: LogoProps) {
           {/* Shield shape */}
           <path
             d="M24 2L6 10V22C6 34.36 13.68 45.64 24 48C34.32 45.64 42 34.36 42 22V10L24 2Z"
-            fill="#DC2626"
+            fill="#D6A84F"
           />
           {/* Inner shield */}
           <path
@@ -51,7 +51,7 @@ export function Logo({ className, size = 'md', variant = 'light' }: LogoProps) {
             O.N.E
           </text>
           {/* Underline accent */}
-          <rect x="12" y="26" width="24" height="2" rx="1" fill="#DC2626" />
+          <rect x="12" y="26" width="24" height="2" rx="1" fill="#D6A84F" />
           {/* Multi-Concepts small text */}
           <text
             x="24"

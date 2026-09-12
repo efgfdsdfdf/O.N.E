@@ -317,13 +317,13 @@ export default function ListingDetailPage() {
         <div className="mt-8">
           <Tabs defaultValue="overview" className="w-full">
             <TabsList className="bg-one-charcoal border border-white/10">
-              <TabsTrigger value="overview" className="data-[state=active]:bg-one-red data-[state=active]:text-white">
+              <TabsTrigger value="overview" className="data-[state=active]:bg-one-red data-[state=active]:text-one-black">
                 Overview
               </TabsTrigger>
-              <TabsTrigger value="specs" className="data-[state=active]:bg-one-red data-[state=active]:text-white">
+              <TabsTrigger value="specs" className="data-[state=active]:bg-one-red data-[state=active]:text-one-black">
                 Specifications
               </TabsTrigger>
-              <TabsTrigger value="features" className="data-[state=active]:bg-one-red data-[state=active]:text-white">
+              <TabsTrigger value="features" className="data-[state=active]:bg-one-red data-[state=active]:text-one-black">
                 Features
               </TabsTrigger>
             </TabsList>
