@@ -1,0 +1,8 @@
+<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Shield shape -->
+  <path d="M24 2L6 10V22C6 34.36 13.68 45.64 24 48C34.32 45.64 42 34.36 42 22V10L24 2Z" fill="#DC2626" />
+  <!-- Inner shield -->
+  <path d="M24 5L9 12V22C9 32.82 15.84 42.76 24 45C32.16 42.76 39 32.82 39 22V12L24 5Z" fill="#0A0A0A" />
+  <!-- O.N.E text -->
+  <text x="24" y="24" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="system-ui, sans-serif" font-weight="900" font-size="14" letter-spacing="0.5">O.N.E</text>
+</svg>
