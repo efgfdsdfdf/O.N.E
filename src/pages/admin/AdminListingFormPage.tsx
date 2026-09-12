@@ -360,7 +360,7 @@ export default function AdminListingFormPage() {
                   ) : (
                     <img src={listingService.getImageUrl(img.storage_path)} alt={img.alt_text || ''} className="w-full h-full object-cover" />
                   )}
-                  {img.is_cover && <span className="absolute top-2 left-2 bg-one-red text-one-black text-[10px] px-2 py-0.5 rounded-full font-medium">Cover</span>}
+                  {img.is_cover && <span className="absolute top-2 left-2 bg-one-red text-white text-[10px] px-2 py-0.5 rounded-full font-medium">Cover</span>}
                   {img.media_type === 'video' && <span className="absolute bottom-2 left-2 bg-black/70 text-white text-[10px] px-2 py-0.5 rounded-full font-medium">Video</span>}
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-wrap items-center justify-center gap-2 p-2">
                     <Button size="sm" variant="outline" className="h-8 text-xs border-white/40 text-white" onClick={() => handleSetCover(img)}>

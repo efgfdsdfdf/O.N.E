@@ -111,7 +111,7 @@ export function Map({ lat, lng, title, address, className, showDirections = true
         {route && (
           <Polyline
             positions={route.coordinates}
-            pathOptions={{ color: '#D6A84F', weight: 5, opacity: 0.9 }}
+            pathOptions={{ color: '#DC2626', weight: 5, opacity: 0.9 }}
           />
         )}
         {userPosition && (
@@ -160,7 +160,7 @@ export function Map({ lat, lng, title, address, className, showDirections = true
                 <ol className="mt-3 space-y-2 text-sm">
                   {route.steps.map((step, index) => (
                     <li key={`${step.instruction}-${index}`} className="flex gap-2 rounded-md bg-white/5 p-2">
-                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-one-red text-[11px] font-bold text-one-black">
+                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-one-red text-[11px] font-bold text-white">
                         {index + 1}
                       </span>
                       <span className="min-w-0 flex-1 text-gray-200">{step.instruction}</span>
