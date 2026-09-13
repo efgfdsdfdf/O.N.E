@@ -221,7 +221,7 @@ export default function ListingDetailPage() {
           </div>
 
           {/* Right: Product Info */}
-          <div className="space-y-5">
+          <div className="min-w-0 space-y-5">
             {/* Title & Badges */}
             <div>
               <div className="flex flex-wrap gap-2 mb-2">
@@ -232,14 +232,14 @@ export default function ListingDetailPage() {
                 {isSold && <Badge variant="sold">SOLD</Badge>}
                 {isOutOfStock && <Badge variant="warning">OUT OF STOCK</Badge>}
               </div>
-              <h1 className="text-2xl lg:text-3xl font-bold text-white">{listing.title}</h1>
+              <h1 className="break-words text-2xl font-bold text-white lg:text-3xl">{listing.title}</h1>
             </div>
 
             {/* Price */}
-            <div className="flex items-baseline gap-3">
-              <span className="text-3xl font-bold text-one-red">{formatNaira(listing.price)}</span>
+            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <span className="text-2xl font-bold text-one-red sm:text-3xl">{formatNaira(listing.price)}</span>
               {listing.previous_price && listing.previous_price > (listing.price || 0) && (
-                <span className="text-gray-500 line-through">{formatNaira(listing.previous_price)}</span>
+                <span className="text-sm text-gray-500 line-through sm:text-base">{formatNaira(listing.previous_price)}</span>
               )}
             </div>
             {listing.negotiable && (
@@ -248,12 +248,12 @@ export default function ListingDetailPage() {
 
             {/* Key Specs */}
             {specItems.length > 0 && (
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 {specItems.map((item) => (
-                  <div key={item.label} className="flex items-center gap-2 text-sm">
-                    <span className="text-one-red">{item.icon}</span>
-                    <span className="text-gray-400">{item.label}:</span>
-                    <span className="text-white font-medium">{item.value}</span>
+                  <div key={item.label} className="flex min-w-0 items-center gap-2 text-sm">
+                    <span className="shrink-0 text-one-red">{item.icon}</span>
+                    <span className="shrink-0 text-gray-400">{item.label}:</span>
+                    <span className="min-w-0 break-words text-white font-medium">{item.value}</span>
                   </div>
                 ))}
               </div>
@@ -270,18 +270,19 @@ export default function ListingDetailPage() {
             <Separator className="bg-white/10" />
 
             {/* CTAs */}
-            <div className="hidden space-y-3 lg:block">
+            <div className="space-y-3">
               <WhatsAppButton
                 listing={listing}
                 size="xl"
                 fullWidth
+                className="min-w-0"
                 variant={isSold ? 'sold' : isOutOfStock ? 'out_of_stock' : 'default'}
               />
               {phone && (
                 <Button
                   variant="outline"
                   size="xl"
-                  className="w-full gap-2 text-white border-white/20 hover:bg-white/10"
+                  className="w-full min-w-0 gap-2 text-white border-white/20 hover:bg-white/10"
                   onClick={handleCall}
                 >
                   <Phone className="h-4 w-4" />
@@ -295,7 +296,7 @@ export default function ListingDetailPage() {
               <Button
                 variant="outline"
                 size="sm"
-                className="flex-1 gap-2 text-white border-white/20"
+                className="min-w-0 flex-1 gap-2 text-white border-white/20"
                 onClick={() => toggleFavorite(listing.id)}
               >
                 <Heart className={`h-4 w-4 ${favorite ? 'fill-one-red text-one-red' : ''}`} />
@@ -304,7 +305,7 @@ export default function ListingDetailPage() {
               <Button
                 variant="outline"
                 size="sm"
-                className="flex-1 gap-2 text-white border-white/20"
+                className="min-w-0 flex-1 gap-2 text-white border-white/20"
                 onClick={handleShare}
               >
                 <Share2 className="h-4 w-4" />
