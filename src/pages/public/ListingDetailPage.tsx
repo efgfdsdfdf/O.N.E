@@ -123,7 +123,7 @@ export default function ListingDetailPage() {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 pb-24 lg:pb-8">
+      <div className="container mx-auto px-4 pb-8">
         <div className="grid lg:grid-cols-[1fr_400px] gap-8">
           {/* Left: Image Gallery */}
           <div className="space-y-3">
@@ -132,62 +132,64 @@ export default function ListingDetailPage() {
               className="relative flex h-[300px] items-center justify-center overflow-hidden bg-one-black cursor-pointer group sm:h-[420px] lg:aspect-[4/3] lg:h-auto"
               onClick={() => setFullscreen(true)}
             >
-              {currentIsVideo ? (
-                <video
-                  src={currentImageUrl}
-                  className="h-full w-full object-contain object-center"
-                  controls
-                  playsInline
-                  onClick={(e) => e.stopPropagation()}
-                />
-              ) : (
-                <img
-                  src={currentImageUrl}
-                  alt={listing.title}
-                  className="h-full w-full object-contain object-center"
-                />
-              )}
-              {/* Status overlay */}
-              {isSold && (
-                <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                  <Badge variant="sold" className="text-xl px-6 py-2">SOLD</Badge>
-                </div>
-              )}
-              <Button
-                variant="ghost"
-                size="icon"
-                className="absolute top-3 right-3 z-20 bg-black/60 text-white hover:bg-black/80"
-              >
-                <Maximize2 className="h-5 w-5" />
-              </Button>
-              {images.length > 1 && (
-                <>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    aria-label="Previous image"
-                    className="absolute left-2 top-1/2 z-20 h-10 w-10 -translate-y-1/2 bg-black/75 text-white shadow-lg ring-1 ring-white/20 hover:bg-black/85 sm:left-3"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedImage((prev) => (prev > 0 ? prev - 1 : images.length - 1));
-                    }}
-                  >
-                    <ChevronLeft className="h-5 w-5" />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    aria-label="Next image"
-                    className="absolute right-2 top-1/2 z-20 h-10 w-10 -translate-y-1/2 bg-black/75 text-white shadow-lg ring-1 ring-white/20 hover:bg-black/85 sm:right-3"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedImage((prev) => (prev < images.length - 1 ? prev + 1 : 0));
-                    }}
-                  >
-                    <ChevronRight className="h-5 w-5" />
-                  </Button>
-                </>
-              )}
+              <div className="relative flex h-full w-fit max-w-full items-center justify-center">
+                {currentIsVideo ? (
+                  <video
+                    src={currentImageUrl}
+                    className="max-h-full max-w-full object-contain object-center"
+                    controls
+                    playsInline
+                    onClick={(e) => e.stopPropagation()}
+                  />
+                ) : (
+                  <img
+                    src={currentImageUrl}
+                    alt={listing.title}
+                    className="max-h-full max-w-full object-contain object-center"
+                  />
+                )}
+                {/* Status overlay */}
+                {isSold && (
+                  <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                    <Badge variant="sold" className="text-xl px-6 py-2">SOLD</Badge>
+                  </div>
+                )}
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute top-3 right-3 z-20 bg-black/60 text-white hover:bg-black/80"
+                >
+                  <Maximize2 className="h-5 w-5" />
+                </Button>
+                {images.length > 1 && (
+                  <>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      aria-label="Previous image"
+                      className="absolute left-2 top-1/2 z-20 h-10 w-10 -translate-y-1/2 bg-black/75 text-white shadow-lg ring-1 ring-white/20 hover:bg-black/85 sm:left-3"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedImage((prev) => (prev > 0 ? prev - 1 : images.length - 1));
+                      }}
+                    >
+                      <ChevronLeft className="h-5 w-5" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      aria-label="Next image"
+                      className="absolute right-2 top-1/2 z-20 h-10 w-10 -translate-y-1/2 bg-black/75 text-white shadow-lg ring-1 ring-white/20 hover:bg-black/85 sm:right-3"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedImage((prev) => (prev < images.length - 1 ? prev + 1 : 0));
+                      }}
+                    >
+                      <ChevronRight className="h-5 w-5" />
+                    </Button>
+                  </>
+                )}
+              </div>
             </div>
 
             {/* Thumbnails */}
@@ -373,27 +375,6 @@ export default function ListingDetailPage() {
               </div>
             </TabsContent>
           </Tabs>
-        </div>
-      </div>
-
-      {/* Mobile Sticky Bottom Bar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-one-charcoal/95 backdrop-blur border-t border-white/10 px-3 py-2 lg:hidden z-40">
-        <div className={`mx-auto grid max-w-md gap-2 ${phone ? 'grid-cols-[minmax(5rem,0.8fr)_minmax(0,1.6fr)]' : 'grid-cols-1'}`}>
-        {phone && (
-          <Button
-            variant="outline"
-            className="min-h-10 h-auto min-w-0 whitespace-normal px-2 py-2 text-xs text-white border-white/20"
-            onClick={handleCall}
-          >
-            <Phone className="h-4 w-4" />
-            <span className="text-center leading-tight">Call</span>
-          </Button>
-        )}
-        <WhatsAppButton
-          listing={listing}
-          className="min-h-10 h-auto min-w-0 whitespace-normal px-2 py-2 text-xs"
-          variant={isSold ? 'sold' : isOutOfStock ? 'out_of_stock' : 'default'}
-        />
         </div>
       </div>
 
