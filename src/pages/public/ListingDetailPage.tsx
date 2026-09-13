@@ -132,64 +132,62 @@ export default function ListingDetailPage() {
               className="relative flex h-[300px] items-center justify-center overflow-hidden bg-one-black cursor-pointer group sm:h-[420px] lg:aspect-[4/3] lg:h-auto"
               onClick={() => setFullscreen(true)}
             >
-              <div className="relative flex h-full w-fit max-w-full items-center justify-center">
-                {currentIsVideo ? (
-                  <video
-                    src={currentImageUrl}
-                    className="max-h-full max-w-full object-contain object-center"
-                    controls
-                    playsInline
-                    onClick={(e) => e.stopPropagation()}
-                  />
-                ) : (
-                  <img
-                    src={currentImageUrl}
-                    alt={listing.title}
-                    className="max-h-full max-w-full object-contain object-center"
-                  />
-                )}
-                {/* Status overlay */}
-                {isSold && (
-                  <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                    <Badge variant="sold" className="text-xl px-6 py-2">SOLD</Badge>
-                  </div>
-                )}
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="absolute top-3 right-3 z-20 bg-black/60 text-white hover:bg-black/80"
-                >
-                  <Maximize2 className="h-5 w-5" />
-                </Button>
-                {images.length > 1 && (
-                  <>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      aria-label="Previous image"
-                      className="absolute left-2 top-1/2 z-20 h-10 w-10 -translate-y-1/2 bg-black/75 text-white shadow-lg ring-1 ring-white/20 hover:bg-black/85 sm:left-3"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setSelectedImage((prev) => (prev > 0 ? prev - 1 : images.length - 1));
-                      }}
-                    >
-                      <ChevronLeft className="h-5 w-5" />
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      aria-label="Next image"
-                      className="absolute right-2 top-1/2 z-20 h-10 w-10 -translate-y-1/2 bg-black/75 text-white shadow-lg ring-1 ring-white/20 hover:bg-black/85 sm:right-3"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setSelectedImage((prev) => (prev < images.length - 1 ? prev + 1 : 0));
-                      }}
-                    >
-                      <ChevronRight className="h-5 w-5" />
-                    </Button>
-                  </>
-                )}
-              </div>
+              {currentIsVideo ? (
+                <video
+                  src={currentImageUrl}
+                  className="absolute inset-0 h-full w-full object-contain object-center"
+                  controls
+                  playsInline
+                  onClick={(e) => e.stopPropagation()}
+                />
+              ) : (
+                <img
+                  src={currentImageUrl}
+                  alt={listing.title}
+                  className="absolute inset-0 h-full w-full object-contain object-center"
+                />
+              )}
+              {/* Status overlay */}
+              {isSold && (
+                <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                  <Badge variant="sold" className="text-xl px-6 py-2">SOLD</Badge>
+                </div>
+              )}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute top-3 right-3 z-20 bg-black/60 text-white hover:bg-black/80"
+              >
+                <Maximize2 className="h-5 w-5" />
+              </Button>
+              {images.length > 1 && (
+                <>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    aria-label="Previous image"
+                    className="absolute left-2 top-1/2 z-20 h-10 w-10 -translate-y-1/2 bg-black/75 text-white shadow-lg ring-1 ring-white/20 hover:bg-black/85 sm:left-3"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedImage((prev) => (prev > 0 ? prev - 1 : images.length - 1));
+                    }}
+                  >
+                    <ChevronLeft className="h-5 w-5" />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    aria-label="Next image"
+                    className="absolute right-2 top-1/2 z-20 h-10 w-10 -translate-y-1/2 bg-black/75 text-white shadow-lg ring-1 ring-white/20 hover:bg-black/85 sm:right-3"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedImage((prev) => (prev < images.length - 1 ? prev + 1 : 0));
+                    }}
+                  >
+                    <ChevronRight className="h-5 w-5" />
+                  </Button>
+                </>
+              )}
             </div>
 
             {/* Thumbnails */}
