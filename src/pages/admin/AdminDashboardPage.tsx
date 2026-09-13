@@ -27,7 +27,7 @@ export default function AdminDashboardPage() {
     queryFn: () => analyticsService.getEventCounts(),
   });
 
-  const viewsCount = analyticsCounts?.['listing_view'] || 0;
+  const viewsCount = stats?.total_views || 0;
   const whatsappClicks = analyticsCounts?.['whatsapp_click'] || 0;
   const ctr = viewsCount > 0 ? ((whatsappClicks / viewsCount) * 100).toFixed(1) : '0.0';
 

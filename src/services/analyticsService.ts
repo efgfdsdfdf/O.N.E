@@ -69,6 +69,7 @@ export const analyticsService = {
 
 function shouldTrackListingView(listingId: string): boolean {
   if (typeof window === 'undefined') return true;
+  if (isLikelyAutomatedVisitor()) return false;
 
   try {
     const now = Date.now();
@@ -92,4 +93,25 @@ function shouldTrackListingView(listingId: string): boolean {
   } catch {
     return true;
   }
+}
+
+function isLikelyAutomatedVisitor(): boolean {
+  const navigatorRef = window.navigator;
+  const userAgent = navigatorRef.userAgent.toLowerCase();
+
+  if (navigatorRef.webdriver) return true;
+
+  return [
+    'bot',
+    'crawl',
+    'spider',
+    'headless',
+    'lighthouse',
+    'pagespeed',
+    'preview',
+    'facebookexternalhit',
+    'telegrambot',
+    'twitterbot',
+    'linkedinbot',
+  ].some((token) => userAgent.includes(token));
 }

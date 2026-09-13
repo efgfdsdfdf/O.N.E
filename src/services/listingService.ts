@@ -241,14 +241,18 @@ export const listingService = {
     sold: number;
     drafts: number;
     featured: number;
+    total_views: number;
   }> {
-    const [total, available, sold, drafts, featured] = await Promise.all([
+    const [total, available, sold, drafts, featured, viewRows] = await Promise.all([
       supabase.from('listings').select('id', { count: 'exact', head: true }),
       supabase.from('listings').select('id', { count: 'exact', head: true }).eq('status', 'published'),
       supabase.from('listings').select('id', { count: 'exact', head: true }).eq('status', 'sold'),
       supabase.from('listings').select('id', { count: 'exact', head: true }).eq('status', 'draft'),
       supabase.from('listings').select('id', { count: 'exact', head: true }).eq('featured', true),
+      supabase.from('listings').select('views_count').in('status', ['published', 'sold']),
     ]);
+
+    if (viewRows.error) throw viewRows.error;
 
     return {
       total: total.count || 0,
@@ -256,6 +260,7 @@ export const listingService = {
       sold: sold.count || 0,
       drafts: drafts.count || 0,
       featured: featured.count || 0,
+      total_views: (viewRows.data || []).reduce((sum, row) => sum + (row.views_count || 0), 0),
     };
   },
 
