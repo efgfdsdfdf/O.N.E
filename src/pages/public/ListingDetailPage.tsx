@@ -128,11 +128,14 @@ export default function ListingDetailPage() {
           {/* Left: Image Gallery */}
           <div className="space-y-3">
             {/* Main Image */}
-            <div className="relative overflow-hidden bg-one-black cursor-pointer group" onClick={() => setFullscreen(true)}>
+            <div
+              className="relative flex h-[360px] items-center justify-center overflow-hidden bg-one-black cursor-pointer group sm:h-[460px] lg:aspect-[4/3] lg:h-auto"
+              onClick={() => setFullscreen(true)}
+            >
               {currentIsVideo ? (
                 <video
                   src={currentImageUrl}
-                  className="block h-auto w-full"
+                  className="h-full w-full object-contain object-center"
                   controls
                   playsInline
                   onClick={(e) => e.stopPropagation()}
@@ -141,7 +144,7 @@ export default function ListingDetailPage() {
                 <img
                   src={currentImageUrl}
                   alt={listing.title}
-                  className="block h-auto w-full"
+                  className="h-full w-full object-contain object-center"
                 />
               )}
               {/* Status overlay */}
@@ -274,18 +277,18 @@ export default function ListingDetailPage() {
                 listing={listing}
                 size="xl"
                 fullWidth
-                className="min-w-0"
+                className="min-w-0 whitespace-normal px-4"
                 variant={isSold ? 'sold' : isOutOfStock ? 'out_of_stock' : 'default'}
               />
               {phone && (
                 <Button
                   variant="outline"
                   size="xl"
-                  className="w-full min-w-0 gap-2 text-white border-white/20 hover:bg-white/10"
+                  className="w-full min-w-0 whitespace-normal px-4 text-white border-white/20 hover:bg-white/10"
                   onClick={handleCall}
                 >
                   <Phone className="h-4 w-4" />
-                  Call Seller
+                  <span className="text-center leading-tight">Call Seller</span>
                 </Button>
               )}
             </div>
@@ -379,16 +382,16 @@ export default function ListingDetailPage() {
         {phone && (
           <Button
             variant="outline"
-            className="h-10 min-w-0 gap-1.5 px-2 text-xs text-white border-white/20"
+            className="min-h-10 h-auto min-w-0 whitespace-normal px-2 py-2 text-xs text-white border-white/20"
             onClick={handleCall}
           >
             <Phone className="h-4 w-4" />
-            Call
+            <span className="text-center leading-tight">Call</span>
           </Button>
         )}
         <WhatsAppButton
           listing={listing}
-          className="h-10 min-w-0 px-2 text-xs"
+          className="min-h-10 h-auto min-w-0 whitespace-normal px-2 py-2 text-xs"
           variant={isSold ? 'sold' : isOutOfStock ? 'out_of_stock' : 'default'}
         />
         </div>
