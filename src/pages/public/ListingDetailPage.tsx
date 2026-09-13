@@ -129,7 +129,7 @@ export default function ListingDetailPage() {
           <div className="space-y-3">
             {/* Main Image */}
             <div
-              className="relative flex aspect-[4/3] max-h-[52vh] min-h-[220px] items-center justify-center rounded-xl overflow-hidden bg-one-charcoal cursor-pointer group sm:max-h-[560px] lg:min-h-0"
+              className="relative flex aspect-[4/3] max-h-[52vh] min-h-[220px] items-center justify-center overflow-hidden bg-one-black cursor-pointer group sm:max-h-[560px] lg:min-h-0"
               onClick={() => setFullscreen(true)}
             >
               {currentIsVideo ? (
@@ -197,7 +197,7 @@ export default function ListingDetailPage() {
                   <button
                     key={img.id}
                     onClick={() => setSelectedImage(i)}
-                    className={`shrink-0 w-20 h-16 rounded-lg overflow-hidden border-2 bg-one-charcoal transition-all ${
+                    className={`shrink-0 w-20 h-16 rounded-lg overflow-hidden border-2 bg-one-black transition-all ${
                       i === selectedImage ? 'border-one-red' : 'border-transparent opacity-60 hover:opacity-100'
                     }`}
                   >
