@@ -128,14 +128,11 @@ export default function ListingDetailPage() {
           {/* Left: Image Gallery */}
           <div className="space-y-3">
             {/* Main Image */}
-            <div
-              className="relative flex aspect-[4/3] max-h-[52vh] min-h-[220px] items-center justify-center overflow-hidden bg-one-black cursor-pointer group sm:max-h-[560px] lg:min-h-0"
-              onClick={() => setFullscreen(true)}
-            >
+            <div className="relative overflow-hidden bg-one-black cursor-pointer group" onClick={() => setFullscreen(true)}>
               {currentIsVideo ? (
                 <video
                   src={currentImageUrl}
-                  className="max-h-full max-w-full object-contain object-center"
+                  className="block h-auto w-full"
                   controls
                   playsInline
                   onClick={(e) => e.stopPropagation()}
@@ -144,7 +141,7 @@ export default function ListingDetailPage() {
                 <img
                   src={currentImageUrl}
                   alt={listing.title}
-                  className="h-auto max-h-full w-auto max-w-full object-contain object-center"
+                  className="block h-auto w-full"
                 />
               )}
               {/* Status overlay */}
@@ -156,7 +153,7 @@ export default function ListingDetailPage() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="absolute top-3 right-3 bg-black/40 text-white hover:bg-black/60"
+                className="absolute top-3 right-3 z-20 bg-black/60 text-white hover:bg-black/80"
               >
                 <Maximize2 className="h-5 w-5" />
               </Button>
@@ -207,13 +204,13 @@ export default function ListingDetailPage() {
                         muted
                         playsInline
                         preload="metadata"
-                        className="h-full w-full object-contain object-center"
+                        className="h-full w-full object-cover object-center"
                       />
                     ) : (
                       <img
                         src={listingService.getImageUrl(img.storage_path)}
                         alt=""
-                        className="h-full w-full object-contain object-center"
+                        className="h-full w-full object-cover object-center"
                       />
                     )}
                   </button>

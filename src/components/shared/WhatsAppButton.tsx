@@ -68,7 +68,7 @@ export function WhatsAppButton({ listing, className, size = 'default', fullWidth
         onClick={handleOpenDialog}
       >
         <MessageCircle className="h-4 w-4" />
-        <span className="min-w-0 truncate">{buttonLabel}</span>
+        <span className="text-center leading-tight">{buttonLabel}</span>
       </Button>
 
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
