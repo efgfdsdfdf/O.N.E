@@ -64,11 +64,11 @@ export function WhatsAppButton({ listing, className, size = 'default', fullWidth
       <Button
         variant="whatsapp"
         size={size}
-        className={`gap-2 ${fullWidth ? 'w-full' : ''} ${className || ''}`}
+        className={`max-w-full gap-2 overflow-hidden whitespace-nowrap ${fullWidth ? 'w-full' : ''} ${className || ''}`}
         onClick={handleOpenDialog}
       >
         <MessageCircle className="h-4 w-4" />
-        <span className="min-w-0 text-center leading-tight whitespace-normal">{buttonLabel}</span>
+        <span className="min-w-0 truncate text-center leading-tight">{buttonLabel}</span>
       </Button>
 
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>

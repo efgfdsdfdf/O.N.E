@@ -38,11 +38,15 @@ export default function ListingDetailPage() {
     }
   }, [listing?.id]);
 
+  useEffect(() => {
+    setSelectedImage(0);
+  }, [listing?.id]);
+
   if (isLoading) {
     return (
       <div className="dark bg-one-black min-h-screen">
         <div className="container mx-auto px-4 py-8">
-          <div className="grid lg:grid-cols-[1fr_400px] gap-8">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(320px,400px)]">
             <Skeleton className="aspect-[4/3] rounded-xl bg-one-charcoal" />
             <div className="space-y-4">
               <Skeleton className="h-8 w-3/4 bg-one-charcoal" />
@@ -71,7 +75,7 @@ export default function ListingDetailPage() {
   }
 
   const specs = listing.specifications as VehicleSpecifications;
-  const images = (listing.images || []).sort((a, b) => a.sort_order - b.sort_order);
+  const images = [...(listing.images || [])].sort((a, b) => a.sort_order - b.sort_order);
   const currentImageUrl = images[selectedImage]
     ? listingService.getImageUrl(images[selectedImage].storage_path)
     : 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" fill="%231a1a1a"><rect width="800" height="600"/><text x="400" y="300" text-anchor="middle" fill="%23666" font-size="18">No Image</text></svg>';
@@ -124,9 +128,9 @@ export default function ListingDetailPage() {
       </div>
 
       <div className="container mx-auto px-4 pb-8">
-        <div className="grid lg:grid-cols-[1fr_400px] gap-8">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(320px,400px)]">
           {/* Left: Image Gallery */}
-          <div className="space-y-3">
+          <div className="min-w-0 space-y-3">
             {/* Main Image */}
             <div
               className="relative flex h-[300px] items-center justify-center overflow-hidden bg-one-black cursor-pointer group sm:h-[420px] lg:aspect-[4/3] lg:h-auto"
@@ -192,7 +196,7 @@ export default function ListingDetailPage() {
 
             {/* Thumbnails */}
             {images.length > 1 && (
-              <div className="flex gap-2 overflow-x-auto hide-scrollbar pb-1">
+              <div className="flex min-w-0 gap-2 overflow-x-auto hide-scrollbar pb-1">
                 {images.map((img, i) => (
                   <button
                     key={img.id}
@@ -223,7 +227,7 @@ export default function ListingDetailPage() {
           </div>
 
           {/* Right: Product Info */}
-          <div className="min-w-0 space-y-5">
+          <div className="min-w-0 max-w-full space-y-5 overflow-hidden">
             {/* Title & Badges */}
             <div>
               <div className="flex flex-wrap gap-2 mb-2">
@@ -277,41 +281,41 @@ export default function ListingDetailPage() {
                 listing={listing}
                 size="xl"
                 fullWidth
-                className="min-w-0 whitespace-normal px-4"
+                className="h-12 min-h-12 min-w-0 max-w-full px-4"
                 variant={isSold ? 'sold' : isOutOfStock ? 'out_of_stock' : 'default'}
               />
               {phone && (
                 <Button
                   variant="outline"
                   size="xl"
-                  className="w-full min-w-0 whitespace-normal px-4 text-white border-white/20 hover:bg-white/10"
+                  className="h-12 min-h-12 w-full min-w-0 max-w-full px-4 text-white border-white/20 hover:bg-white/10"
                   onClick={handleCall}
                 >
                   <Phone className="h-4 w-4" />
-                  <span className="text-center leading-tight">Call Seller</span>
+                  <span className="truncate text-center leading-tight">Call Seller</span>
                 </Button>
               )}
             </div>
 
             {/* Share & Favorite */}
-            <div className="flex gap-2">
+            <div className="grid min-w-0 max-w-full grid-cols-2 gap-2">
               <Button
                 variant="outline"
                 size="sm"
-                className="min-w-0 flex-1 gap-2 text-white border-white/20"
+                className="w-full min-w-0 gap-2 overflow-hidden text-white border-white/20"
                 onClick={() => toggleFavorite(listing.id)}
               >
                 <Heart className={`h-4 w-4 ${favorite ? 'fill-one-red text-one-red' : ''}`} />
-                {favorite ? 'Saved' : 'Save'}
+                <span className="min-w-0 truncate">{favorite ? 'Saved' : 'Save'}</span>
               </Button>
               <Button
                 variant="outline"
                 size="sm"
-                className="min-w-0 flex-1 gap-2 text-white border-white/20"
+                className="w-full min-w-0 gap-2 overflow-hidden text-white border-white/20"
                 onClick={handleShare}
               >
                 <Share2 className="h-4 w-4" />
-                Share
+                <span className="min-w-0 truncate">Share</span>
               </Button>
             </div>
           </div>
