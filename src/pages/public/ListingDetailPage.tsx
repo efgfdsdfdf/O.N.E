@@ -129,7 +129,7 @@ export default function ListingDetailPage() {
           <div className="space-y-3">
             {/* Main Image */}
             <div
-              className="relative flex h-[360px] items-center justify-center overflow-hidden bg-one-black cursor-pointer group sm:h-[460px] lg:aspect-[4/3] lg:h-auto"
+              className="relative flex h-[300px] items-center justify-center overflow-hidden bg-one-black cursor-pointer group sm:h-[420px] lg:aspect-[4/3] lg:h-auto"
               onClick={() => setFullscreen(true)}
             >
               {currentIsVideo ? (
@@ -166,7 +166,7 @@ export default function ListingDetailPage() {
                     variant="ghost"
                     size="icon"
                     aria-label="Previous image"
-                    className="absolute left-2 top-1/2 z-20 h-10 w-10 -translate-y-1/2 bg-black/70 text-white shadow-lg ring-1 ring-white/10 hover:bg-black/80 sm:left-3"
+                    className="absolute left-2 top-1/2 z-20 h-10 w-10 -translate-y-1/2 bg-black/75 text-white shadow-lg ring-1 ring-white/20 hover:bg-black/85 sm:left-3"
                     onClick={(e) => {
                       e.stopPropagation();
                       setSelectedImage((prev) => (prev > 0 ? prev - 1 : images.length - 1));
@@ -178,7 +178,7 @@ export default function ListingDetailPage() {
                     variant="ghost"
                     size="icon"
                     aria-label="Next image"
-                    className="absolute right-2 top-1/2 z-20 h-10 w-10 -translate-y-1/2 bg-black/70 text-white shadow-lg ring-1 ring-white/10 hover:bg-black/80 sm:right-3"
+                    className="absolute right-2 top-1/2 z-20 h-10 w-10 -translate-y-1/2 bg-black/75 text-white shadow-lg ring-1 ring-white/20 hover:bg-black/85 sm:right-3"
                     onClick={(e) => {
                       e.stopPropagation();
                       setSelectedImage((prev) => (prev < images.length - 1 ? prev + 1 : 0));
@@ -378,7 +378,7 @@ export default function ListingDetailPage() {
 
       {/* Mobile Sticky Bottom Bar */}
       <div className="fixed bottom-0 left-0 right-0 bg-one-charcoal/95 backdrop-blur border-t border-white/10 px-3 py-2 lg:hidden z-40">
-        <div className={`mx-auto grid max-w-md gap-2 ${phone ? 'grid-cols-[minmax(5rem,0.85fr)_minmax(0,1.35fr)]' : 'grid-cols-1'}`}>
+        <div className={`mx-auto grid max-w-md gap-2 ${phone ? 'grid-cols-[minmax(5rem,0.8fr)_minmax(0,1.6fr)]' : 'grid-cols-1'}`}>
         {phone && (
           <Button
             variant="outline"
