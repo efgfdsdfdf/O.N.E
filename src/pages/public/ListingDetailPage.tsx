@@ -129,13 +129,13 @@ export default function ListingDetailPage() {
           <div className="space-y-3">
             {/* Main Image */}
             <div
-              className="relative flex h-[min(58vh,430px)] min-h-[280px] items-center justify-center rounded-xl overflow-hidden bg-one-charcoal cursor-pointer group sm:h-[min(62vh,560px)] lg:aspect-[4/3] lg:h-auto lg:min-h-0"
+              className="relative flex aspect-[4/3] max-h-[52vh] min-h-[220px] items-center justify-center rounded-xl overflow-hidden bg-one-charcoal cursor-pointer group sm:max-h-[560px] lg:min-h-0"
               onClick={() => setFullscreen(true)}
             >
               {currentIsVideo ? (
                 <video
                   src={currentImageUrl}
-                  className="h-full w-full object-contain object-center"
+                  className="max-h-full max-w-full object-contain object-center"
                   controls
                   playsInline
                   onClick={(e) => e.stopPropagation()}
@@ -144,7 +144,7 @@ export default function ListingDetailPage() {
                 <img
                   src={currentImageUrl}
                   alt={listing.title}
-                  className="h-full w-full object-contain object-center"
+                  className="h-auto max-h-full w-auto max-w-full object-contain object-center"
                 />
               )}
               {/* Status overlay */}
@@ -270,7 +270,7 @@ export default function ListingDetailPage() {
             <Separator className="bg-white/10" />
 
             {/* CTAs */}
-            <div className="space-y-3">
+            <div className="hidden space-y-3 lg:block">
               <WhatsAppButton
                 listing={listing}
                 size="xl"
@@ -374,11 +374,12 @@ export default function ListingDetailPage() {
       </div>
 
       {/* Mobile Sticky Bottom Bar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-one-charcoal/95 backdrop-blur border-t border-white/10 p-3 flex gap-3 lg:hidden z-40">
+      <div className="fixed bottom-0 left-0 right-0 bg-one-charcoal/95 backdrop-blur border-t border-white/10 px-3 py-2 lg:hidden z-40">
+        <div className={`mx-auto grid max-w-md gap-2 ${phone ? 'grid-cols-[minmax(5rem,0.85fr)_minmax(0,1.35fr)]' : 'grid-cols-1'}`}>
         {phone && (
           <Button
             variant="outline"
-            className="flex-1 gap-2 text-white border-white/20"
+            className="h-10 min-w-0 gap-1.5 px-2 text-xs text-white border-white/20"
             onClick={handleCall}
           >
             <Phone className="h-4 w-4" />
@@ -387,9 +388,10 @@ export default function ListingDetailPage() {
         )}
         <WhatsAppButton
           listing={listing}
-          className="flex-1"
+          className="h-10 min-w-0 px-2 text-xs"
           variant={isSold ? 'sold' : isOutOfStock ? 'out_of_stock' : 'default'}
         />
+        </div>
       </div>
 
       {/* Fullscreen Image */}
