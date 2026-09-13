@@ -279,6 +279,7 @@ export interface WhatsAppSettings {
 // ============================================================================
 
 export type EventType =
+  | 'site_visit'
   | 'listing_view'
   | 'whatsapp_click'
   | 'call_click'

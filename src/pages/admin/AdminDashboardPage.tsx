@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { 
-  Car, Eye, MousePointerClick, TrendingUp,
+  Car, Eye, MousePointerClick, TrendingUp, Users,
 } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -28,6 +28,7 @@ export default function AdminDashboardPage() {
   });
 
   const viewsCount = stats?.total_views || 0;
+  const siteVisits = analyticsCounts?.['site_visit'] || 0;
   const whatsappClicks = analyticsCounts?.['whatsapp_click'] || 0;
   const ctr = viewsCount > 0 ? ((whatsappClicks / viewsCount) * 100).toFixed(1) : '0.0';
 
@@ -39,10 +40,16 @@ export default function AdminDashboardPage() {
       desc: `${stats?.drafts || 0} drafts`,
     },
     {
-      title: 'Total Views',
+      title: 'Site Visitors',
+      value: siteVisits.toLocaleString(),
+      icon: <Users className="h-6 w-6 text-purple-500" />,
+      desc: 'Unique browsers per 24h',
+    },
+    {
+      title: 'Listing Detail Views',
       value: viewsCount.toLocaleString(),
-      icon: <Eye className="h-6 w-6 text-purple-500" />,
-      desc: 'All time',
+      icon: <Eye className="h-6 w-6 text-cyan-500" />,
+      desc: 'Total listing detail page views',
     },
     {
       title: 'WhatsApp Clicks',
@@ -74,7 +81,7 @@ export default function AdminDashboardPage() {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-4">
         {statCards.map((stat, i) => (
           <Card key={i} className="min-w-0 bg-one-charcoal border-white/10 p-5 sm:p-6 flex flex-col justify-between">
             <div className="flex min-w-0 justify-between items-start gap-3 mb-4">

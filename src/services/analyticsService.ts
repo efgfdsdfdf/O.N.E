@@ -3,6 +3,7 @@ import type { EventType } from '@/types';
 import { listingService } from '@/services/listingService';
 
 const VIEW_DEDUPE_KEY = 'one_mc_seen_listing_views';
+const SITE_VISIT_DEDUPE_KEY = 'one_mc_seen_site_visit';
 const VIEW_DEDUPE_MS = 24 * 60 * 60 * 1000;
 
 export const analyticsService = {
@@ -26,6 +27,13 @@ export const analyticsService = {
       this.trackEvent('listing_view', listingId),
       listingService.incrementViews(listingId),
     ]);
+    return true;
+  },
+
+  async trackSiteVisit(): Promise<boolean> {
+    if (!shouldTrackSiteVisit()) return false;
+
+    await this.trackEvent('site_visit');
     return true;
   },
 
@@ -89,6 +97,25 @@ function shouldTrackListingView(listingId: string): boolean {
 
     seen[listingId] = now;
     window.localStorage.setItem(VIEW_DEDUPE_KEY, JSON.stringify(seen));
+    return true;
+  } catch {
+    return true;
+  }
+}
+
+function shouldTrackSiteVisit(): boolean {
+  if (typeof window === 'undefined') return true;
+  if (isLikelyAutomatedVisitor()) return false;
+
+  try {
+    const now = Date.now();
+    const lastSeen = Number(window.localStorage.getItem(SITE_VISIT_DEDUPE_KEY) || 0);
+
+    if (lastSeen && now - lastSeen < VIEW_DEDUPE_MS) {
+      return false;
+    }
+
+    window.localStorage.setItem(SITE_VISIT_DEDUPE_KEY, String(now));
     return true;
   } catch {
     return true;
