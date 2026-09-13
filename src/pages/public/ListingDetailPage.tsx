@@ -76,7 +76,8 @@ export default function ListingDetailPage() {
     ? listingService.getImageUrl(images[selectedImage].storage_path)
     : 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" fill="%231a1a1a"><rect width="800" height="600"/><text x="400" y="300" text-anchor="middle" fill="%23666" font-size="18">No Image</text></svg>';
   const currentMedia = images[selectedImage];
-  const currentIsVideo = currentMedia?.media_type === 'video';
+  const isVideo = (path: string) => /\.(mp4|webm|mov|ogg)$/i.test(path || '');
+  const currentIsVideo = currentMedia && isVideo(currentMedia.storage_path);
 
   const isSold = listing.status === 'sold';
   const isOutOfStock = listing.status === 'out_of_stock';
@@ -134,7 +135,7 @@ export default function ListingDetailPage() {
               {currentIsVideo ? (
                 <video
                   src={currentImageUrl}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                   controls
                   playsInline
                   onClick={(e) => e.stopPropagation()}
@@ -143,7 +144,7 @@ export default function ListingDetailPage() {
                 <img
                   src={currentImageUrl}
                   alt={listing.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                 />
               )}
               {/* Status overlay */}
@@ -198,7 +199,7 @@ export default function ListingDetailPage() {
                       i === selectedImage ? 'border-one-red' : 'border-transparent opacity-60 hover:opacity-100'
                     }`}
                   >
-                    {img.media_type === 'video' ? (
+                    {isVideo(img.storage_path) ? (
                       <video
                         src={listingService.getImageUrl(img.storage_path)}
                         muted
